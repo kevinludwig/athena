@@ -1,0 +1,45 @@
+{
+  "name": "athena",
+  "version": "0.0.1",
+  "description": "chess database",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "predist": "npm run compile",
+    "dist": "electron-builder"
+  },
+  "author": "",
+  "license": "MIT",
+  "build": {
+    "appId": "my.app.id.91292353552",
+    "files": [
+      "src/**/*",
+      "node_modules/**/*"
+    ]
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
+    "chess.js": "^0.10.3",
+    "chessboardjsx": "^2.4.2",
+    "electron": "^8.2.5",
+    "electron-builder": "^22.6.0",
+    "electron-webpack": "^2.8.2",
+    "electron-webpack-ts": "^4.0.1",
+    "immutable": "^4.0.0-rc.12",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-immutable": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "typescript": "^3.8.3",
+    "webpack": "^4.43.0"
+  },
+  "dependencies": {
+    "source-map-support": "^0.5.19",
+    "ts-loader": "^7.0.2"
+  }
+}

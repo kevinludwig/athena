@@ -1,0 +1,9 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "ordered-imports": false,
+        "quotemark": [true, "single", "avoid-escape"],
+        "object-literal-key-quotes": [true, "as-needed"],
+        "trailing-comma": [true, {"multiline": "never", "singleline": "never"}]
+    }
+}

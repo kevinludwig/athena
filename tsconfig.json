@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "baseUrl": ".",
+        "sourceMap": true,
+        "module": "es2015",
+        "moduleResolution": "node",
+        "target": "ES2018",
+        "jsx": "react",
+        "lib": ["dom", "es2018"]
+    },
+    "exclude": ["src/main/index.js"],
+    "include": ["src"],
+    "compileOnSave": false
+}
