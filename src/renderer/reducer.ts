@@ -1,3 +1,7 @@
 import {combineReducers} from 'redux-immutable';
 
-export default combineReducers({});
+import game from './reducers/game';
+
+export default combineReducers({
+    game
+});

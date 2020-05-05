@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 
 import FolderOpen from '../icons/FolderOpen';
+import openFileDialog from '../utils/openFileDialog';
 
 const useStyles = makeStyles(theme => ({
     toolbar: {
@@ -14,14 +15,20 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-between'
     }
 }));
-export default () => {
+export default (props) => {
     const classes = useStyles({});
+
+    const onOpenFile = () => {
+        const files = openFileDialog()
+    }
     return (
         <AppBar position="static">
             <Toolbar className={classes.toolbar} variant="dense">
                 <Typography variant="h6">Athena</Typography>
                 <Tooltip title="Open">
-                    <IconButton color="inherit">
+                    <IconButton
+                        color="inherit"
+                        onClick={onOpenFile}>
                         <FolderOpen />
                     </IconButton>
                 </Tooltip>
