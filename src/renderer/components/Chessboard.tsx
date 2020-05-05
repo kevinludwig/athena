@@ -107,7 +107,7 @@ export default () => {
     const onSquareRightClick = square => setSquareStyles({ [square]: { backgroundColor: 'deepPink' }});
 
     const onCalcWidth = ({screenWidth, screenHeight}) => {
-        const RESERVED = 50; /* roughly the size of the player button bar */
+        const RESERVED = 100; /* roughly the size of the player button bar */
         return screenHeight >= (screenWidth + RESERVED) ?  screenWidth : screenHeight - RESERVED;
     };
     return (
