@@ -1,23 +1,31 @@
 import {readFile} from 'fs';
+import {fromJS} from 'immutable';
+import makeParser from 'pgn-parser';
 import actionCreator from '../utils/actionCreator';
+
+let parser = null;
+makeParser((err, p) => {
+    parser = p;
+});
 
 const setPgnFile = actionCreator('GAME_SET_PGN_FILE', (pgnFile) => ({
     pgnFile
 }));
-const setPgnData = actionCreator('GAME_SET_PGN_DATA', (pgnData) => ({
-   pgnData
+const setPgnData = actionCreator('GAME_SET_PGN_DATA', (pgnText, pgnData) => ({
+    pgnText,
+    pgnData: fromJS(pgnData)
 }));
 
-export const loadGame = actionCreator('GAME_LOAD', (pgnFile) => {
+export const loadGame = (pgnFile) => {
     return (dispatch) => {
         dispatch(setPgnFile(pgnFile));
-        readFile(pgnFile, 'utf-8', (err, data) => {
+        readFile(pgnFile, 'utf-8', (err, text) => {
             if (!err) {
-                dispatch(setPgnData(data));
+                dispatch(setPgnData(text, parser.parse(text)));
             }
         });
     }
-});
+};
 
 export const setMove = actionCreator('GAME_SET_MOVE', (move) => ({
     ...move

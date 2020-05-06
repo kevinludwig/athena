@@ -1,7 +1,7 @@
 import {remote} from 'electron';
 
 export default () => {
-    return remote.dialog.showOpenDialog({
+    const files = remote.dialog.showOpenDialogSync({
         properties: ['openFile'],
         filters: [
             {
@@ -10,4 +10,5 @@ export default () => {
             }
         ]
     });
+    return files && files[0];
 }

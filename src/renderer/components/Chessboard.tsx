@@ -22,7 +22,7 @@ interface Props {
     setMove: (any) => void;
     priorMove: any;
 }
-export default (props: Props) => {
+export default React.memo((props: Props) => {
     const {
         fen,
         setMove,
@@ -106,6 +106,7 @@ export default (props: Props) => {
         const RESERVED = 100; /* roughly the size of the player button bar */
         return screenHeight >= (screenWidth + RESERVED) ?  screenWidth : screenHeight - RESERVED;
     };
+
     return (
         <Chessboard
             calcWidth={onCalcWidth}
@@ -122,6 +123,8 @@ export default (props: Props) => {
             onDragOverSquare={onDragOverSquare}
             onSquareClick={onSquareClick}
             onSquareRightClick={onSquareRightClick}
+            transitionDuration={100}
+            undo
         />
     );   
-};
+});

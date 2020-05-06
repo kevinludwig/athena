@@ -10,6 +10,12 @@ export const move = ({fen, from, to}) => {
     return m && {fen: chess.fen(), priorMove: m};
 };
 
+export const moveSAN = ({fen, san}) => {
+    chess.load(fen);
+    const m = chess.move(san);
+    return m && {fen: chess.fen(), priorMove: m};
+};
+
 export const moves = ({fen, square}) => {
     chess.load(fen);
     return chess.moves({
@@ -18,7 +24,19 @@ export const moves = ({fen, square}) => {
     });
 };
 
+export const moveTo = (moves) => {
+    const ch = new Chess();
+    let move = null;
+    for (let m of moves) {
+        move = ch.move(m.get('move'));
+        if (!move) return null;    
+    }
+    return {fen: ch.fen(), priorMove: move};
+};
+
 export default {
     move,
-    moves
+    moveSAN,
+    moves,
+    moveTo
 };

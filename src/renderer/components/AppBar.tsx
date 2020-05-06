@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
@@ -21,10 +21,10 @@ export default (props) => {
     const classes = useStyles({});
     const dispatch = useDispatch();
 
-    const onOpenFile = () => {
+    const onOpenFile = useCallback(() => {
         const pgnFile = openFileDialog();
         dispatch(loadGame(pgnFile));
-    };
+    }, [loadGame]);
 
     return (
         <AppBar position="static">

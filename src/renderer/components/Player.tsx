@@ -11,11 +11,11 @@ export default () => {
     const dispatch = useDispatch();
     const fen = useSelector(selectFen);
     const priorMove = useSelector(selectPriorMove);
-    const handleSetMove = useCallback((move) => dispatch(setMove(move)), [])
-    const handleStepBackward = useCallback(() => dispatch(undoMove()), []);
-    const handleStepForward = useCallback(() => dispatch(makeMove()), []);
-    const handleSkipBackward = useCallback(() => dispatch(moveToStart()), []);
-    const handleSkipForward = useCallback(() => dispatch(moveToEnd()), []);
+    const handleSetMove = useCallback((move) => dispatch(setMove(move)), [setMove])
+    const handleStepBackward = useCallback(() => dispatch(undoMove()), [undoMove]);
+    const handleStepForward = useCallback(() => dispatch(makeMove()), [makeMove]);
+    const handleSkipBackward = useCallback(() => dispatch(moveToStart()), [moveToStart]);
+    const handleSkipForward = useCallback(() => dispatch(moveToEnd()), [moveToEnd]);
 
     return (
         <Container disableGutters>
