@@ -3,17 +3,18 @@ import Chess from 'chess.js';
 import Chessboard from 'chessboardjsx';
 
 const squareStyling = ({ pieceSquare, history }) => {
-    const sourceSquare = history.length && history[history.length - 1].from;
-    const targetSquare = history.length && history[history.length - 1].to;
+    const move = history.size && history.last();
+    const sourceSquare = move && move.from;
+    const targetSquare = move && move.to;
 
     return {
         [pieceSquare]: { backgroundColor: 'rgba(255, 255, 0, 0.4)' },
-        ...(history.length && {
+        ...(sourceSquare && {
             [sourceSquare]: {
                 backgroundColor: 'rgba(255, 255, 0, 0.4)'
             }
         }),
-        ...(history.length && {
+        ...(targetSquare && {
             [targetSquare]: {
                 backgroundColor: 'rgba(255, 255, 0, 0.4)'
             }
@@ -21,12 +22,22 @@ const squareStyling = ({ pieceSquare, history }) => {
     };
 };
 
-export default () => {
-    const [fen, setFen] = useState('start');
+interface Props {
+    fen: string;
+    setFen: (string) => void;
+    history: string[];
+    setHistory: ([string]) => void;
+}
+export default (props: Props) => {
+    const {
+        fen,
+        setFen,
+        history,
+        setHistory
+    } = props;
     const [dropSquareStyle, setDropSquareStyle] = useState({});
     const [squareStyles, setSquareStyles] = useState({});
     const [pieceSquare, setPieceSquare] = useState('');
-    const [history, setHistory] = useState([]);
 
     const gameRef = useRef(new Chess());
     

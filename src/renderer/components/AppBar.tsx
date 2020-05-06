@@ -1,4 +1,5 @@
 import React from 'react';
+import {useDispatch} from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,6 +9,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 import FolderOpen from '../icons/FolderOpen';
 import openFileDialog from '../utils/openFileDialog';
+import {loadGame} from '../actions/game';
 
 const useStyles = makeStyles(theme => ({
     toolbar: {
@@ -17,10 +19,13 @@ const useStyles = makeStyles(theme => ({
 }));
 export default (props) => {
     const classes = useStyles({});
+    const dispatch = useDispatch();
 
     const onOpenFile = () => {
-        const files = openFileDialog()
-    }
+        const pgnFile = openFileDialog();
+        dispatch(loadGame(pgnFile));
+    };
+
     return (
         <AppBar position="static">
             <Toolbar className={classes.toolbar} variant="dense">
