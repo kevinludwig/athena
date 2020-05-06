@@ -4,15 +4,14 @@ import Container from '@material-ui/core/Container';
 
 import Chessboard from './Chessboard';
 import PlayButtonGroup from './PlayButtonGroup';
-import {selectFen, selectHistory} from '../selectors/game';
-import {undoMove, makeMove, moveToStart, moveToEnd, setFen, setHistory} from '../actions/game';
+import {selectFen, selectPriorMove} from '../selectors/game';
+import {undoMove, makeMove, moveToStart, moveToEnd, setMove} from '../actions/game';
 
 export default () => {
     const dispatch = useDispatch();
     const fen = useSelector(selectFen);
-    const history = useSelector(selectHistory);
-    const handleSetFen = useCallback((fen) => dispatch(setFen(fen)), []);
-    const handleSetHistory = useCallback((history) => dispatch(setHistory(history)), [])
+    const priorMove = useSelector(selectPriorMove);
+    const handleSetMove = useCallback((move) => dispatch(setMove(move)), [])
     const handleStepBackward = useCallback(() => dispatch(undoMove()), []);
     const handleStepForward = useCallback(() => dispatch(makeMove()), []);
     const handleSkipBackward = useCallback(() => dispatch(moveToStart()), []);
@@ -22,9 +21,8 @@ export default () => {
         <Container disableGutters>
             <Chessboard
                 fen={fen}
-                setFen={handleSetFen}
-                history={history}
-                setHistory={handleSetHistory} />
+                priorMove={priorMove}
+                setMove={handleSetMove} />
             <PlayButtonGroup 
                 onSkipBackward={handleSkipBackward}
                 onSkipForward={handleSkipForward}

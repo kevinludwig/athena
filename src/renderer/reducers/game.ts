@@ -4,15 +4,14 @@ const initialState = fromJS({
     pgnFile: null,
     pgnData: null,
     fen: 'start',
-    history: []
+    priorMove: null 
 });
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case 'GAME_SET_PGN_FILE':
         case 'GAME_SET_PGN_DATA':
-        case 'GAME_SET_FEN':
-        case 'GAME_SET_HISTORY':
+        case 'GAME_SET_MOVE':
             return state.merge(action.payload);
         case 'GAME_MAKE_MOVE':
         case 'GAME_UNDO_MOVE':

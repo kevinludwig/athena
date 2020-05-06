@@ -1,5 +1,4 @@
 import {readFile} from 'fs';
-import {fromJS} from 'immutable';
 import actionCreator from '../utils/actionCreator';
 
 const setPgnFile = actionCreator('GAME_SET_PGN_FILE', (pgnFile) => ({
@@ -20,11 +19,8 @@ export const loadGame = actionCreator('GAME_LOAD', (pgnFile) => {
     }
 });
 
-export const setFen = actionCreator('GAME_SET_FEN', (fen) => ({
-    fen
-}));
-export const setHistory = actionCreator('GAME_SET_HISTORY', (history) => ({
-    history: fromJS(history)
+export const setMove = actionCreator('GAME_SET_MOVE', (move) => ({
+    ...move
 }));
 export const makeMove = actionCreator('GAME_MAKE_MOVE');
 export const undoMove = actionCreator('GAME_UNDO_MOVE');

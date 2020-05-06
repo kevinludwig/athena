@@ -1,47 +1,38 @@
-import React, {useState, useRef} from 'react';
-import Chess from 'chess.js';
+import React, {useState} from 'react';
 import Chessboard from 'chessboardjsx';
+import chess from '../utils/chess';
 
-const squareStyling = ({ pieceSquare, history }) => {
-    const move = history.size && history.last();
-    const sourceSquare = move && move.from;
-    const targetSquare = move && move.to;
-
+const squareStyling = ({ pieceSquare, priorMove }) => {
+    const sourceSquare = priorMove && priorMove.from;
+    const targetSquare = priorMove && priorMove.to;
+    const backgroundColor = 'rgba(255, 255, 0, 0.4)';
     return {
-        [pieceSquare]: { backgroundColor: 'rgba(255, 255, 0, 0.4)' },
+        [pieceSquare]: { backgroundColor },
         ...(sourceSquare && {
-            [sourceSquare]: {
-                backgroundColor: 'rgba(255, 255, 0, 0.4)'
-            }
+            [sourceSquare]: { backgroundColor }
         }),
         ...(targetSquare && {
-            [targetSquare]: {
-                backgroundColor: 'rgba(255, 255, 0, 0.4)'
-            }
+            [targetSquare]: { backgroundColor }
         })
     };
 };
 
 interface Props {
     fen: string;
-    setFen: (string) => void;
-    history: string[];
-    setHistory: ([string]) => void;
+    setMove: (any) => void;
+    priorMove: any;
 }
 export default (props: Props) => {
     const {
         fen,
-        setFen,
-        history,
-        setHistory
+        setMove,
+        priorMove
     } = props;
     const [dropSquareStyle, setDropSquareStyle] = useState({});
     const [squareStyles, setSquareStyles] = useState({});
     const [pieceSquare, setPieceSquare] = useState('');
 
-    const gameRef = useRef(new Chess());
-    
-    const removeHighlightSquare = (square) => setSquareStyles(squareStyling({pieceSquare: square, history}));
+    const removeHighlightSquare = (square) => setSquareStyles(squareStyling({pieceSquare: square, priorMove}));
 
     const highlightSquare = (sourceSquare, squaresToHighlight) => {
         const highlightStyles = [sourceSquare, ...squaresToHighlight].reduce(
@@ -55,7 +46,7 @@ export default (props: Props) => {
                         }
                     },
                     ...squareStyling({
-                        history,
+                        priorMove,
                         pieceSquare
                     })
                 };
@@ -65,25 +56,20 @@ export default (props: Props) => {
     };
 
     const onDrop = ({ sourceSquare, targetSquare }) => {
-        const move = gameRef.current.move({
+        const move = chess.move({
+            fen,
             from: sourceSquare,
-            to: targetSquare,
-            promotion: 'q'
+            to: targetSquare
         });
 
         if (move) {
-            setFen(gameRef.current.fen());
-            setHistory(gameRef.current.history({verbose: true}));
-            setSquareStyles(squareStyling({pieceSquare, history}));
+            setMove(move);
+            setSquareStyles(squareStyling({pieceSquare, priorMove}));
         }
     };
 
     const onMouseOverSquare = square => {
-        const moves = gameRef.current.moves({
-            square,
-            verbose: true
-        });
-
+        const moves = chess.moves({fen, square});
         if (moves.length) {
             highlightSquare(square, moves.map(m => m.to));
         }
@@ -99,18 +85,17 @@ export default (props: Props) => {
     };
 
     const onSquareClick = square => {
-        setSquareStyles(squareStyling({ pieceSquare: square, history }));
+        setSquareStyles(squareStyling({ pieceSquare: square, priorMove }));
         setPieceSquare(square);
 
-        const move = gameRef.current.move({
+        const move = chess.move({
+            fen,
             from: pieceSquare,
-            to: square,
-            promotion: 'q'
+            to: square
         });
 
         if (move) {
-            setFen(gameRef.current.fen());
-            setHistory(gameRef.current.history({verbose: true}));
+            setMove(move);
             setPieceSquare('');
         }
     };
