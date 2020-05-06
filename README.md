@@ -2,9 +2,9 @@
 
 Trying to build a chess database for Mac.
 
-1. Current state: it renders a chessboard and accepts legal moves.
-2. Short term goals: 
-    * read a PGN with one game and allow play-through of primary variation (back/forward buttons)
+1. Current state: reads a PGN file (single game) and allows play through of primary variation with back/forward buttons 
+2. Short term goals:
+    * remove or improve the square highlighting
     * move text view that shows all moves and allows click to specific move
     * stockfish integration with analysis window
 3. Medium term goals:
