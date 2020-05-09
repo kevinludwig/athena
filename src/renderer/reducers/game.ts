@@ -1,7 +1,5 @@
-import { fromJS } from 'immutable';
+import { fromJS, List, Map } from 'immutable';
 import chess from '../utils/chess';
-
-const START_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
 const initialState = fromJS({
     /* filename loaded */
@@ -11,58 +9,75 @@ const initialState = fromJS({
     pgnText: null,
 
     /* parsed pgn data */
-    pgnData: null,
+    pgnData: List(),
 
     /* playback position into pgnData */
     currentMove: 0,
 
-    /* FEN of current position: used by chessboardjsx to render */
-    fen: START_FEN,
-
-    /* prior move: used by chessboard for move highlighting */
-    priorMove: null 
+    /* currently selected game index */
+    currentGame: 0
 });
 
-/* may be several games in parsed PGN, limiting to one first for now */
-const CURRENT_GAME = 0;
+const initialPgnData = fromJS([
+    {
+        moves: []
+    }
+]);
+const setMove = (state, {san, fen, from, to}) => {
+    const currentGame = state.get('currentGame');
+    const currentMove = state.get('currentMove');
+
+    if (!state.hasIn(['pgnData', currentGame, 'moves'])) {
+        const pgnData = initialPgnData.updateIn([currentGame, 'moves'], List(),
+            (list) => list.push(Map({
+                move: san,
+                fen,
+                from, 
+                to
+            })));
+        console.log('pgnData', pgnData.toJS());
+        return state.set('pgnData', pgnData).set('currentMove', currentMove+1);
+    } else {
+        return state
+            .set('currentMove', currentMove + 1)
+            .updateIn(['pgnData', currentGame, 'moves'], List(), 
+                (list) => list.setSize(currentMove).push(Map({
+                    move: san,
+                    fen,
+                    from,
+                    to
+                })));
+    }            
+};
 
 const makeMove = (state) => {
     const currentMove = state.get('currentMove');
-    const san = state.getIn(['pgnData', CURRENT_GAME, 'moves', currentMove, 'move']);
-    const fen = state.get('fen');
-    const move = chess.moveSAN({fen, san});
-    return move ? state.merge({
-        ...move,
-        currentMove: currentMove + 1
-    }) : state;
+    const currentGame = state.get('currentGame');
+    if (state.hasIn(['pgnData', currentGame, 'moves', currentMove, 'move'])) {
+        return state.merge({
+            currentMove: currentMove + 1
+        });
+    } else return state;
 };
 
 const undoMove = (state) => {
     const currentMove = state.get('currentMove');
     if (currentMove > 0) {
-        const moves = state.getIn(['pgnData', CURRENT_GAME, 'moves']);
-        const move = chess.moveTo(moves.take(currentMove - 1).values());
-        if (move) {
-            return state.merge({
-                ...move,
-                currentMove: currentMove - 1
-            });
-        }
+        return state.merge({
+            currentMove: currentMove - 1
+        });
     } 
     return state;
 };
 
 const moveToEnd = (state) => {
-    const moves = state.getIn(['pgnData', CURRENT_GAME, 'moves']);
+    const currentGame = state.get('currentGame');
+    const moves = state.getIn(['pgnData', currentGame, 'moves']);
     const currentMove = moves.size;
     if (currentMove > 0) {
-        const move = chess.moveTo(moves.values());
-        if (move) {
-            return state.merge({
-                ...move,
-                currentMove
-            });
-        }
+        return state.merge({
+            currentMove
+        });
     } 
     return state;
 };
@@ -71,23 +86,20 @@ const moveToEnd = (state) => {
 export default (state = initialState, action) => {
     switch (action.type) {
         case 'GAME_SET_PGN_FILE':
-        case 'GAME_SET_MOVE':
             return state.merge(action.payload);
         case 'GAME_SET_PGN_DATA':
             return state.merge({
                 ...action.payload, 
-                fen: START_FEN,
-                priorMove: null,
                 currentMove: 0
-            });
+                });
+        case 'GAME_SET_MOVE':
+            return setMove(state, action.payload);
         case 'GAME_MAKE_MOVE':
             return makeMove(state);
         case 'GAME_UNDO_MOVE':
             return undoMove(state); 
         case 'GAME_MOVE_TO_START':
             return state.merge({
-                fen: START_FEN,
-                priorMove: null,
                 currentMove: 0
             });
         case 'GAME_MOVE_TO_END':

@@ -29,6 +29,7 @@
     "electron-builder": "^22.6.0",
     "electron-webpack": "^2.8.2",
     "electron-webpack-ts": "^4.0.1",
+    "fenify": "0.0.2",
     "immutable": "^4.0.0-rc.12",
     "pgn-parser": "1.0.2",
     "react": "^16.13.1",
@@ -38,6 +39,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-immutable": "^4.0.0",
     "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
     "typescript": "^3.8.3",
     "webpack": "^4.43.0"
   },
