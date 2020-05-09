@@ -2,17 +2,17 @@
 
 Trying to build a chess database for Mac.
 
-1. Current state: reads a PGN file (single game) and allows play through of primary variation with back/forward buttons 
-2. Short term goals:
+Current state: reads a PGN file (single game) and allows play through of primary variation with back/forward buttons 
+    
+Features:
     * move text view that shows all moves and allows click to specific move
+    * ECO code indicator
     * stockfish integration with analysis window
-3. Medium term goals:
-    * read a PGN with many games, game selection window, tabbed view to have multiple games open
-    * support PGN with RAV and navigation across all variations
-    * in place edit to add variations and commentary, save back to PGN
-4. Long term goals: 
-    * compare against feature set of SCID and figure out what I want to build
-    * minimally, a "database" which could just be a directory of PGNs, with fast search by position, and other filters
+    * multi-game window support 
+    * RAV support
+    * Edit variations, add commentary, NAGs, etc.
+    * Save back to PGN
+    * Search by position, search by player
 
 ### Setup etc.
 
