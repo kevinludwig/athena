@@ -7,7 +7,7 @@ const verbose = true;
 export const move = ({fen, from, to}) => {
     chess.load(fen);
     const m = chess.move({from, to, promotion});
-    return m && {fen: chess.fen(), priorMove: m};
+    return m && {fen: chess.fen(), san: m.san, from, to};
 };
 
 export const moveSAN = ({fen, san}) => {

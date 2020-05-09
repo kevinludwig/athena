@@ -1,6 +1,7 @@
 import {readFile} from 'fs';
 import {fromJS} from 'immutable';
 import pgnParser from 'pgn-parser';
+import fenify from 'fenify';
 import actionCreator from '../utils/actionCreator';
 
 const setPgnFile = actionCreator('GAME_SET_PGN_FILE', (pgnFile) => ({
@@ -16,7 +17,7 @@ export const loadGame = (pgnFile) => {
         dispatch(setPgnFile(pgnFile));
         readFile(pgnFile, 'utf-8', (err, text) => {
             if (!err) {
-                dispatch(setPgnData(text, pgnParser.parse(text)));
+                dispatch(setPgnData(text, pgnParser.parse(text).map(fenify)));
             }
         });
     }
