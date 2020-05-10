@@ -9,7 +9,11 @@ const initialState = fromJS({
     pgnText: null,
 
     /* parsed pgn data */
-    pgnData: List(),
+    pgnData: [
+        {
+            moves: []
+        }
+    ],
 
     /* playback position into pgnData */
     currentMove: 0,
@@ -18,36 +22,19 @@ const initialState = fromJS({
     currentGame: 0
 });
 
-const initialPgnData = fromJS([
-    {
-        moves: []
-    }
-]);
 const setMove = (state, {san, fen, from, to}) => {
     const currentGame = state.get('currentGame');
     const currentMove = state.get('currentMove');
 
-    if (!state.hasIn(['pgnData', currentGame, 'moves'])) {
-        const pgnData = initialPgnData.updateIn([currentGame, 'moves'], List(),
-            (list) => list.push(Map({
+    return state
+        .set('currentMove', currentMove + 1)
+        .updateIn(['pgnData', currentGame, 'moves'], List(), 
+            (list) => list.setSize(currentMove).push(Map({
                 move: san,
                 fen,
-                from, 
+                from,
                 to
             })));
-        console.log('pgnData', pgnData.toJS());
-        return state.set('pgnData', pgnData).set('currentMove', currentMove+1);
-    } else {
-        return state
-            .set('currentMove', currentMove + 1)
-            .updateIn(['pgnData', currentGame, 'moves'], List(), 
-                (list) => list.setSize(currentMove).push(Map({
-                    move: san,
-                    fen,
-                    from,
-                    to
-                })));
-    }            
 };
 
 const makeMove = (state) => {

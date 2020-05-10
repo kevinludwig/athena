@@ -1,3 +1,4 @@
+import {List, Map} from 'immutable';
 import {createSelector} from 'reselect';
 
 const ROOT = 'game';
@@ -30,4 +31,12 @@ export const selectPriorMove = createSelector(
         const from = pgnData.getIn([currentGame, 'moves', currentMove-1, 'from']);
         const to = pgnData.getIn([currentGame, 'moves', currentMove-1, 'to']);
         return {from, to};
+    });
+
+export const selectGame = createSelector(
+    selectPgnData,
+    selectCurrentGame,
+    (pgnData, currentGame) => {
+        console.log('selectGame', pgnData.toJS());
+        return pgnData.get(currentGame, Map());
     });
