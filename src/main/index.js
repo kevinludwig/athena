@@ -13,6 +13,7 @@ function createMainWindow() {
         minWidth: 1000,
         minHeight: 710,
         useContentSize: true,
+        show: false,
         webPreferences: {
             nodeIntegration: true
         }
@@ -44,6 +45,7 @@ function createMainWindow() {
         });
     });
 
+    window.once('ready-to-show', () => window.show());
     return window;
 }
 
