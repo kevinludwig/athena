@@ -6,13 +6,11 @@ Current state: reads a PGN file (single game) and allows play through of primary
 
 Current Task:
     Movetext
-        * move numbers
+        * move numbers (interactive move input)
         * NAGs
         * RAVs
         * Commentary
-        * Link to position
-        * Bold styling for current move
-        * general styling of movetext relative to chess board
+
 Features:
     * movetext
     * ECO code indicator

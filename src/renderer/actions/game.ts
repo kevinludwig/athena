@@ -26,6 +26,11 @@ export const loadGame = (pgnFile) => {
 export const setMove = actionCreator('GAME_SET_MOVE', (move) => ({
     ...move
 }));
+
+export const skipToMove = actionCreator('GAME_SKIP_TO_MOVE', (moveIndex) => ({
+    currentMove: moveIndex+1
+}));
+
 export const makeMove = actionCreator('GAME_MAKE_MOVE');
 export const undoMove = actionCreator('GAME_UNDO_MOVE');
 export const moveToStart = actionCreator('GAME_MOVE_TO_START');

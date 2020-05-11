@@ -73,6 +73,7 @@ const moveToEnd = (state) => {
 export default (state = initialState, action) => {
     switch (action.type) {
         case 'GAME_SET_PGN_FILE':
+        case 'GAME_SKIP_TO_MOVE':
             return state.merge(action.payload);
         case 'GAME_SET_PGN_DATA':
             return state.merge({
