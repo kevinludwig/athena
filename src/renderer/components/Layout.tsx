@@ -15,8 +15,8 @@ const useStyles = makeStyles((theme) => ({
     root: {
         margin: theme.spacing(1),
         display: 'grid',
-        gridTemplateColumns: '400px 1fr',
-        gridTemplateRows: '400px auto 80px',
+        gridTemplateColumns: '500px 1fr',
+        gridTemplateRows: '500px auto 80px',
         gridGap: theme.spacing(1)
     },
     movetext: {
@@ -43,7 +43,7 @@ export default () => {
     return (
         <Container className={classes.root} disableGutters>
             <Chessboard
-                height={400}
+                height={500}
                 fen={fen}
                 priorMove={priorMove}
                 setMove={handleSetMove} />
