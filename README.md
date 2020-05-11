@@ -3,9 +3,18 @@
 Trying to build a chess database for Mac.
 
 Current state: reads a PGN file (single game) and allows play through of primary variation with back/forward buttons 
-    
+
+Current Task:
+    Movetext
+        * move numbers
+        * NAGs
+        * RAVs
+        * Commentary
+        * Link to position
+        * Bold styling for current move
+        * general styling of movetext relative to chess board
 Features:
-    * move text view that shows all moves and allows click to specific move
+    * movetext
     * ECO code indicator
     * stockfish integration with analysis window
     * multi-game window support 
