@@ -19,6 +19,7 @@ const squareStyling = ({ pieceSquare, priorMove }) => {
 
 interface Props {
     fen: string;
+    height: number;
     setMove: (any) => void;
     priorMove: any;
 }
@@ -26,6 +27,7 @@ interface Props {
 export default React.memo((props: Props) => {
     const {
         fen,
+        height,
         setMove,
         priorMove
     } = props;
@@ -63,10 +65,7 @@ export default React.memo((props: Props) => {
         }
     };
 
-    const onCalcWidth = ({screenWidth, screenHeight}) => {
-        const RESERVED = 116; /* roughly the size of the player button bar */
-        return screenHeight >= (screenWidth + RESERVED) ?  screenWidth : screenHeight - RESERVED;
-    };
+    const onCalcWidth = () => height;
 
     return (
         <Chessboard
