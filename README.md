@@ -6,11 +6,13 @@ Current state: reads a PGN file (single game) and allows play through of primary
 
 Current Task:
     Movetext
+    
         * move numbers (interactive move input)
         * NAGs
         * Commentary
 
 Features:
+
     * ECO code indicator
     * stockfish integration with analysis window
     * multi-game window support 
