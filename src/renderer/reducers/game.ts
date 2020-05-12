@@ -11,7 +11,8 @@ const initialState = fromJS({
     /* parsed pgn data */
     pgnData: [
         {
-            moves: []
+            moves: [],
+            headers: {}
         }
     ],
 

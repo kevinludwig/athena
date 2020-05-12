@@ -8,11 +8,9 @@ Current Task:
     Movetext
         * move numbers (interactive move input)
         * NAGs
-        * RAVs
         * Commentary
 
 Features:
-    * movetext
     * ECO code indicator
     * stockfish integration with analysis window
     * multi-game window support 

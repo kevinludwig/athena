@@ -23,6 +23,23 @@ const useStyles = makeStyles((theme) => ({
     },
     lastMove: {
         fontWeight: 'bold'
+    },
+    header: {
+        fontSize: '0.875rem'
+    },
+    hob: {
+        fontWeight: 'bold',
+        paddingRight: theme.spacing(0.5)
+    },
+    hcb: {
+        fontWeight: 'bold',
+        paddingLeft: theme.spacing(0.5)
+    },
+    hk: {
+        color: theme.palette.text.primary
+    },
+    hv: {
+        color: theme.palette.success.main   
     }
 }));
 
@@ -39,6 +56,14 @@ export default (props) => {
 
     return (
         <Paper className={clsx(props.className, classes.root)}>
+            {game.get('headers').entrySeq().map(([k, v], index) => (
+                <Typography className={classes.header} key={index}>
+                    <span className={classes.hob}>[</span>
+                    <span className={classes.hk}>{k} </span>
+                    <span className={classes.hv}>"{v}"</span>
+                    <span className={classes.hcb}>]</span>
+                </Typography>
+            ))}
             <Typography>
                 {game.get('moves').map((m, index) => (
                     <span key={index}>
