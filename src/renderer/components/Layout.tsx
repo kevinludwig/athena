@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import {makeStyles} from '@material-ui/core/styles';
 
 import Chessboard from './Chessboard';
-import Movetext from './Movetext';
+import Movetext from './movetext/Movetext';
 import PlayButtonGroup from './PlayButtonGroup';
 import EngineAnalysis from './EngineAnalysis';
 import {selectFen, selectPriorMove} from '../selectors/game';
