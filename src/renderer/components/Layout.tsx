@@ -16,16 +16,16 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         display: 'grid',
         gridTemplateColumns: '500px 1fr',
-        gridTemplateRows: '500px auto 80px',
+        gridTemplateRows: '500px auto calc(100vh - 628px)',
         gridGap: theme.spacing(1)
     },
     movetext: {
         gridRow: 'span 2',
-        marginRight: theme.spacing(2)
+        maxHeight: '556px',
+        overflow: 'scroll'
     },
     analysis: {
-        gridColumn: 'span 2',
-        marginRight: theme.spacing(2)
+        gridColumn: 'span 2'
     }
 }));
 
@@ -41,7 +41,7 @@ export default () => {
     const handleSkipForward = useCallback(() => dispatch(moveToEnd()), [moveToEnd]);
 
     return (
-        <Container className={classes.root} disableGutters>
+        <div className={classes.root}>
             <Chessboard
                 height={500}
                 fen={fen}
@@ -54,6 +54,6 @@ export default () => {
                 onStepBackward={handleStepBackward}
                 onStepForward={handleStepForward} />
             <EngineAnalysis className={classes.analysis} />
-       </Container>
+       </div>
     );
 };
