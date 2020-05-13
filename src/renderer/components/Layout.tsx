@@ -7,6 +7,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Chessboard from './Chessboard';
 import Movetext from './movetext/Movetext';
 import PlayButtonGroup from './PlayButtonGroup';
+import EcoCodeIndicator from './EcoCodeIndicator';
 import EngineAnalysis from './EngineAnalysis';
 import {selectFen, selectPriorMove} from '../selectors/game';
 import {undoMove, makeMove, moveToStart, moveToEnd, setMove} from '../actions/game';
@@ -16,12 +17,12 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         display: 'grid',
         gridTemplateColumns: '500px 1fr',
-        gridTemplateRows: '500px auto calc(100vh - 628px)',
+        gridTemplateRows: '500px auto auto calc(100vh - 656px)',
         gridGap: theme.spacing(1)
     },
     movetext: {
-        gridRow: 'span 2',
-        maxHeight: '556px',
+        gridRow: 'span 3',
+        maxHeight: '574px',
         overflow: 'scroll'
     },
     analysis: {
@@ -48,6 +49,7 @@ export default () => {
                 priorMove={priorMove}
                 setMove={handleSetMove} />
             <Movetext className={classes.movetext} />
+            <EcoCodeIndicator />
             <PlayButtonGroup
                 onSkipBackward={handleSkipBackward}
                 onSkipForward={handleSkipForward}
