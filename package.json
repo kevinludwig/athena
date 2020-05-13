@@ -42,11 +42,12 @@
     "redux-immutable": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
+    "ts-loader": "^7.0.4",
     "typescript": "^3.8.3",
     "webpack": "^4.43.0"
   },
   "dependencies": {
     "source-map-support": "^0.5.19",
-    "ts-loader": "^7.0.2"
+    "stockfish": "^10.0.2"
   }
 }
