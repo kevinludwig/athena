@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 
-import {selectFen} from '../selectors/game';
+import {setLastEcoCode} from '../actions/game';
+import {selectFen, selectLastEcoCode} from '../selectors/game';
 import lookupEcoCode from 'chess-eco-codes';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,13 +19,14 @@ const makeText = (ecoCode) => {
 
 export default () => {
     const classes = useStyles({});
+    const dispatch = useDispatch();
     const fen = useSelector(selectFen);
-    const [lastEcoCode, setLastEcoCode] = useState(null);
+    const lastEcoCode = useSelector(selectLastEcoCode);
 
     useEffect(() => {
         const ecoCode = lookupEcoCode(fen);
         if (ecoCode) {
-            setLastEcoCode(ecoCode);
+            dispatch(setLastEcoCode(ecoCode));
         }
     }, [fen]);
 

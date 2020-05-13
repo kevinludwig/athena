@@ -17,12 +17,12 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         display: 'grid',
         gridTemplateColumns: '500px 1fr',
-        gridTemplateRows: '500px auto auto calc(100vh - 656px)',
+        gridTemplateRows: '500px 36px auto calc(100vh - 674px)',
         gridGap: theme.spacing(1)
     },
     movetext: {
         gridRow: 'span 3',
-        maxHeight: '574px',
+        maxHeight: '592px',
         overflow: 'scroll'
     },
     analysis: {

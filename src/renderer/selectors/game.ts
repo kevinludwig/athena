@@ -9,6 +9,8 @@ const selectCurrentMove = (state) => state.getIn([ROOT, 'currentMove']);
 export const selectPgnFile = (state) => state.getIn([ROOT, 'pgnFile']);
 export const selectPgnData = (state) => state.getIn([ROOT, 'pgnData']);
 
+export const selectLastEcoCode = (state) => state.getIn([ROOT, 'lastEcoCode']);
+
 export const selectLastMove = createSelector(
     selectCurrentMove,
     (currentMove) => currentMove - 1);
