@@ -1,5 +1,4 @@
 import { fromJS, List, Map } from 'immutable';
-import chess from '../utils/chess';
 
 const initialState = fromJS({
     /* filename loaded */
