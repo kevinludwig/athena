@@ -76,7 +76,7 @@ const moveToEnd = (state) => {
 
 
 export default (state = initialState, action) => {
-switch (action.type) {
+    switch (action.type) {
         case 'GAME_SET_PGN_FILE':
         case 'GAME_SKIP_TO_MOVE':
         case 'GAME_SET_LAST_ECO_CODE':
@@ -86,7 +86,7 @@ switch (action.type) {
                 ...action.payload, 
                 currentMove: 0,
                 lastEcoCode: null
-                });
+            });
         case 'GAME_SET_MOVE':
             return setMove(state, action.payload);
         case 'GAME_MAKE_MOVE':
