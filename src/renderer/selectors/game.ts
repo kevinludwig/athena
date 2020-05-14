@@ -43,6 +43,5 @@ export const selectGame = createSelector(
     selectPgnData,
     selectCurrentGame,
     (pgnData, currentGame) => {
-        console.log('selectGame', pgnData.toJS());
         return pgnData.get(currentGame, Map());
     });
