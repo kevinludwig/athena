@@ -48,7 +48,9 @@ export default (props) => {
                         {props.move.get('move')}
                         {(props.move.get('nags') || []).map(lookupNag).join(' ')}
                     </Button>
-                    {props.move.has('comment') ? <Commentary text={props.move.get('comment')} /> : null}
+                    {props.move.has('comments') ? props.move.get('comments').map((comment, index) => (
+                        <Commentary key={index} text={comment.get('text')} /> 
+                    )) : null}
                 </>
         </span>
     );

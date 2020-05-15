@@ -12,8 +12,8 @@ const initialState = fromJS({
     pgnData: [
         {
             moves: [],
-            comment: [],
-            headers: {}
+            comments: [],
+            headers: []
         }
     ],
 

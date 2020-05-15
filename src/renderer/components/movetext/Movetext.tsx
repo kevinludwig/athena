@@ -30,11 +30,11 @@ export default (props) => {
 
     return (
         <Paper className={clsx(props.className, classes.root)}>
-            {game.get('headers', Map()).entrySeq().map(([k, v], index) => (
-                <Header key={index} name={k} value={v} />
+            {game.get('headers', List()).map((header, index) => (
+                <Header key={index} name={header.get('name')} value={header.get('value')} />
             ))}
             <Typography>
-                {(game.get('comment') || []).map((text, index) => <Commentary text={text} key={index} />)}
+                {(game.getIn(['comments', 'text']) || []).map((text, index) => <Commentary text={text} key={index} />)}
                 {game.get('moves').map((m, index) => <Move key={index} index={index} move={m} />)}
                 {game.get('result')}
             </Typography>

@@ -33,7 +33,7 @@
     "electron-webpack-ts": "^4.0.1",
     "fenify": "0.0.2",
     "immutable": "^4.0.0-rc.12",
-    "pgn-parser": "1.0.2",
+    "pgn-parser": "^2.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
