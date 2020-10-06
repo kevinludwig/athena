@@ -27,7 +27,7 @@
     "chess.js": "^0.10.3",
     "chessboardjsx": "^2.4.2",
     "clsx": "^1.1.0",
-    "electron": "^8.2.5",
+    "electron": "^8.5.1",
     "electron-builder": "^22.6.0",
     "electron-webpack": "^2.8.2",
     "electron-webpack-ts": "^4.0.1",
